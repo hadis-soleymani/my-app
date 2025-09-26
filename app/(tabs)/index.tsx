@@ -1,31 +1,29 @@
-import { StyleSheet, Text,View } from 'react-native';
+import { Button, StyleSheet, Text,TextInput,View } from 'react-native';
 
 export default function HomeScreen() {
   return (
-    
-     <View>
-<Text>jsdhfkjshkdgjs</Text>
+     <View style={styles.appContainer}>
+     <View style={styles.textInputContainer}>
+      <TextInput style={styles.textInput}/>
+      <Button title='Add'/>
      </View>
-     
-     
+     <View>
+      <Text>Goals list...</Text>
+     </View>
+     </View>        
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  appContainer:{
+    padding:50,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  textInputContainer:{
+   flexDirection:'row'
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+  textInput:{
+    borderColor:'#aaa',
+    borderWidth:1,
+    width:300
+  }
 });
