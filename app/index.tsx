@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import GoalItem from "../../components/GoalItem";
-import GoalInput from "../../components/GoalInput";
-import { FlatList, StyleSheet, View, Button } from "react-native";
+import GoalItem from "../components/GoalItem";
+import GoalInput from "../components/GoalInput";
+import { FlatList, StyleSheet, View, Button, Image } from "react-native";
 
 export default function HomeScreen() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -19,8 +19,8 @@ export default function HomeScreen() {
     setModalIsVisible(true);
   }
 
-  function endAddGoalHandler(){
-    setModalIsVisible(false)
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
   }
 
   function addGoalHandler(enteredGoalText: string) {
@@ -28,14 +28,19 @@ export default function HomeScreen() {
       ...prev,
       { text: enteredGoalText, key: Math.random().toString() },
     ]);
-    endAddGoalHandler()
+    endAddGoalHandler();
   }
 
   return (
     <View style={styles.appContainer}>
       <Button title="Add" color="purple" onPress={showModal} />
+      
       {modalIsVisible && (
-        <GoalInput onCancel={endAddGoalHandler} onAddInput={addGoalHandler} visible={modalIsVisible} />
+        <GoalInput
+          onCancel={endAddGoalHandler}
+          onAddInput={addGoalHandler}
+          visible={modalIsVisible}
+        />
       )}
       <View style={styles.listContainer}>
         <FlatList
@@ -62,6 +67,7 @@ const styles = StyleSheet.create({
   appContainer: {
     padding: 40,
     flex: 1,
+
   },
   listContainer: {
     flex: 3,
