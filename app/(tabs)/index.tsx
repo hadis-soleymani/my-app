@@ -1,46 +1,53 @@
 import React, { useState } from "react";
 import GoalItem from "../../components/GoalItem";
-import {
-  Button,
-  FlatList,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import GoalInput from "../../components/GoalInput";
+import { FlatList, StyleSheet, View, Button } from "react-native";
 
 export default function HomeScreen() {
-  const [enteredGoalText, setEnteredGoadText] = useState("");
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [courseGoals, setCourseGoals] = useState<
     { text: string; key: string }[]
   >([]);
 
-  function goalInputHandler(enteredText: string) {
-    setEnteredGoadText(enteredText);
+  function onDelete(id: string) {
+    setCourseGoals((currentCourseGoals) => {
+      return currentCourseGoals.filter((goal) => goal.key != id);
+    });
   }
 
-  function addGoalHandler() {
-    console.log(enteredGoalText);
+  function showModal() {
+    setModalIsVisible(true);
+  }
+
+  function endAddGoalHandler(){
+    setModalIsVisible(false)
+  }
+
+  function addGoalHandler(enteredGoalText: string) {
     setCourseGoals((prev) => [
       ...prev,
       { text: enteredGoalText, key: Math.random().toString() },
     ]);
+    endAddGoalHandler()
   }
 
   return (
     <View style={styles.appContainer}>
-      <View style={styles.textInputContainer}>
-        <TextInput
-          onChangeText={goalInputHandler}
-          placeholder="add a goal"
-          style={styles.textInput}
-        />
-        <Button title="Add Goals" onPress={addGoalHandler} />
-      </View>
+      <Button title="Add" color="purple" onPress={showModal} />
+      {modalIsVisible && (
+        <GoalInput onCancel={endAddGoalHandler} onAddInput={addGoalHandler} visible={modalIsVisible} />
+      )}
       <View style={styles.listContainer}>
         <FlatList
           data={courseGoals}
           renderItem={(dataItem) => {
-            return <GoalItem text={dataItem.item} />;
+            return (
+              <GoalItem
+                text={dataItem.item.text}
+                id={dataItem.item.key}
+                onDeleteItem={onDelete}
+              />
+            );
           }}
           keyExtractor={(item, index) => {
             return item.key;
@@ -55,16 +62,6 @@ const styles = StyleSheet.create({
   appContainer: {
     padding: 40,
     flex: 1,
-  },
-  textInputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 16,
-  },
-  textInput: {
-    borderColor: "#ccc",
-    borderWidth: 1,
-    width: "70%",
   },
   listContainer: {
     flex: 3,
