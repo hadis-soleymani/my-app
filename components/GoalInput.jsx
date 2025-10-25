@@ -18,9 +18,9 @@ function GoalInput(props) {
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.textInputContainer}>
         <Image
-        style={styles.image}
-        source={require("../assets/images/goal.png")}
-      />
+          style={styles.image}
+          source={require("../assets/images/goal.png")}
+        />
         <TextInput
           onChangeText={goalInputHandler}
           placeholder="add a goal"
@@ -49,24 +49,27 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     paddingHorizontal: 16,
-    backgroundColor:'#311b6a',
+    backgroundColor: "#311b6a",
   },
   textInput: {
     borderColor: "#ccc",
     borderWidth: 1,
     marginBottom: 16,
+    padding: 8,
+    borderRadius: 8,
   },
   buttonsContainer: {
     flexDirection: "row",
-    justifyContent:'center',
-    gap:16
+    justifyContent: "center",
+    gap: 16,
   },
   button: {
-    width:100
+    width: 100,
   },
   image: {
-    width: 100,
-    height: 100,
-    margin:50
+    width: 80,
+    height: 80,
+    marginHorizontal: "auto",
+    marginBottom: 32,
   },
 });
