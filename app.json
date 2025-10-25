@@ -3,6 +3,7 @@
     "name": "my-app",
     "slug": "my-app",
     "version": "1.0.0",
+    "backgroundColor": "#5e0acc",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
